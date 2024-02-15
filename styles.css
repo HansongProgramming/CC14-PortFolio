@@ -1,0 +1,35 @@
+.Container{
+    height: 450px;
+    width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    box-shadow: -2px 5px 6px 4px rgba(  0,0,0,0.4);
+    border-radius: 75px;
+    margin-top: 10%;
+}
+
+.LeftControl{
+    width: 15%;
+    background-color: rgb(74, 161, 219);
+    border-radius: 75px 0px 0px 75px;
+    margin-right: 5px ;
+}
+
+.MainScreen{
+    width: 70%;
+    background-color: black;
+}
+
+.InnerScreen{
+    width: 94%;
+    height: 92%;
+    margin: 20px;
+    background-color: rgb(62, 62, 65);
+}
+.RightControl{
+    width: 15%;
+    background-color: rgb(230, 73, 107);
+    border-radius: 0px 75px 75px 0px;
+    margin-left: 5px ;
+}
