@@ -4,154 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Image Sequence Switcher</title>
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-    }
-    img {
-        scale: 0.3;
-        position: absolute;
-    }
-
-    .trigger{
-        width: 300px;
-        height: 300px;
-        color: rgba(0, 0, 0, 0);
-        font-size: 40px;
-        position: absolute;
-        top: 20%;
-        left: 10%;
-        z-index: -1;
-    }
-    .hide{
-        display: none;
-    }
-    .message{
-        width: 1200px;
-        height: 400px;
-        background-color: black;
-        transform: translate(60%, 80%);        
-        left: 20;
-        display: none;
-        animation: zoomIn 0.2s forwards;
-    }
-    @keyframes zoomIn {
-        from {
-            transform: translate(60%, 80%) scale(0);
-        }
-        to {
-            transform: translate(60%, 80%) scale(1);
-        }
-    }
-</style>
+<link rel="stylesheet" href="gamefile.css">
 </head>
 <body>
-    <img id="image" src="pov1 frame1.png">
-    <div class="trigger">Press [Space]</div>
-    <div class="message">THIS IS A TEST DIV</div>
-    <script>
-        let currentSequence = "pov1";
-        let currentFrame = 1;
-        let intervalId = null;
-        let x = 0;
-        let y = 0;
-
-        function switchSequence(sequence) {
-            if (currentSequence !== sequence) {
-                currentSequence = sequence;
-                currentFrame = 1;
-                updateImage();
-            }
-        }
-
-        function updateImage() {
-    let image = document.getElementById('image');
-    let trigger = document.querySelector('.trigger');
-    let message = document.querySelector('.message');
-    let imageRect = image.getBoundingClientRect();
-    let triggerRect = trigger.getBoundingClientRect();
-
-    let xOverlap = Math.max(0, Math.min(imageRect.right, triggerRect.right) - Math.max(imageRect.left, triggerRect.left));
-    
-    let yOverlap = Math.max(0, Math.min(imageRect.bottom, triggerRect.bottom) - Math.max(imageRect.top, triggerRect.top));
-    
-    if (xOverlap > 0 && yOverlap > 0) {
-        trigger.style.color = 'rgba(255,0,0,1)';
-    } else {
-        trigger.style.color = 'rgba(0,0,0,0)';
-        message.style.display = 'none';
-    }
-
-    image.src = `${currentSequence} frame${currentFrame}.png`;
-    image.style.left = `${x}%`;
-    image.style.top = `${y}%`;
-}
-
-        function cycleW() {
-            y -= 2;
-            currentFrame++;
-            if (currentFrame > 5) {currentFrame = 1;}
-            updateImage();
-        }
-        function cycleA() {
-            x -= 2;
-            currentFrame++;
-            if (currentFrame > 5) {currentFrame = 1;}
-            updateImage();
-        }
-        function cycleS() {
-            y += 2;
-            currentFrame++;
-            if (currentFrame > 5) {currentFrame = 1;}
-            updateImage();
-        }
-        function cycleD() {
-            x += 2;
-            currentFrame++;
-            if (currentFrame > 5) {currentFrame = 1;}
-            updateImage();
-        }
-
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'w') {
-                switchSequence('pov2');
-                if (!intervalId) {
-                    intervalId = setInterval(cycleW, 100); // Change frame every 100ms
-                }
-            } else if (event.key === 'a') {
-                switchSequence('pov1');
-                const imageElement = document.getElementById('image');
-                imageElement.src = `${currentSequence} frame${currentFrame}.png`;
-                imageElement.style.transform = 'scaleX(-1)';
-                if (!intervalId) {
-                    intervalId = setInterval(cycleA, 100); // Change frame every 100ms
-                }
-            } else if (event.key === 's') {
-                switchSequence('pov3');
-                if (!intervalId) {
-                    intervalId = setInterval(cycleS, 100); // Change frame every 100ms
-                }
-            } else if (event.key === 'd') {
-                switchSequence('pov1');
-                const imageElement = document.getElementById('image');
-                imageElement.src = `${currentSequence} frame${currentFrame}.png`;
-                imageElement.style.transform = 'scaleX(1)';
-                if (!intervalId) {
-                    intervalId = setInterval(cycleD, 100); // Change frame every 100ms
-                }
-            } else if (event.key === ' ') {
-                // When spacebar is pressed, show the message
-                const message = document.querySelector('.message');
-                message.style.display = 'block';
-            }
-        });
-
-        document.addEventListener('keyup', function(event) {
-            clearInterval(intervalId);
-            intervalId = null;
-        });
-    </script>
+    <div id="screenHalf"></div>
+    <img id="image" src="gifsequence_idle/0000.png">
+    <img src="augnina.gif" style="transform: scale(0.5); position: absolute; top: 5%; left: 15%;">
+    <div class="augninaTrigger"><h1 style="font-size: 20px;">[SPACE] to interact</h1></div>
+    <div class="tabletTrigger"><h1 style="font-size: 20px;">[SPACE] to interact</h1></div>
+    <div class="laptopTrigger"><h1 style="font-size: 20px;">[SPACE] to interact</h1></div>
+    <div class="cabinetTrigger"><h1 style="font-size: 20px;">[SPACE] to interact</h1></div>
+    <div class="message">
+        <h1 style="font-size: 35px;">Hansong:</h1>
+        <br>
+        <span style="color: white; font-size: 16px;" class="content"></span></div>
+    <script src="gamescript.js"></script>
 </body>
 </html>

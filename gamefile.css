@@ -1,0 +1,81 @@
+html{
+    filter: contrast(110%);
+    filter: saturate(180%);
+}
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-image: url(bg.png);
+}
+img {
+    transform: scale(0.6);
+    position: absolute;
+    left: 35%;
+    top: 25%;
+    -webkit-box-reflect: below 0px linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.06));
+}
+.augninaTrigger{
+    width: 200px;
+    height: 200px;
+    font-size: 25px;
+    position: absolute;
+    top: 20%;
+    left: 21%;
+    text-align: center;
+}
+.tabletTrigger{
+    position: absolute;
+    top: 20%;
+    left: 70%;
+    width: 300px;
+    height: 300px;
+    text-align: center;
+}
+
+.laptopTrigger{
+    position: absolute;
+    top: 65%;
+    left: 75%;
+    width: 300px;
+    height: 300px;
+    text-align: center;
+}
+.cabinetTrigger{
+    position: absolute;
+    top: 60%;
+    left: 2%;
+    width: 300px;
+    height: 300px;
+    text-align: center;
+}
+#screenHalf{
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    top: 50%;
+}
+.hide{
+    display: none;
+}
+.message{
+    position: absolute;
+    width: 600px;
+    height: auto;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    display: none;
+    animation: zoomIn 0.2s forwards;
+    border-radius: 10px;
+    border: solid white 2px;
+    padding-left: 20px;
+    top: 70%;
+    left: 12%;
+    z-index: 4;
+}
+
+@keyframes zoomIn {from {transform: translate(60%, 80%) scale(0);}
+                    to {transform: translate(60%, 80%) scale(1);}}
+h1{
+    margin: 0;
+}
