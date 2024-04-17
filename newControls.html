@@ -103,7 +103,7 @@
     <audio id="myAudio" src="Audio/bgm.mp3" autoplay></audio>
     <audio id="select"src="Audio/select.mp3"></audio>
     <div class="Game">
-        <img id="player" src="img/Character/hans-idle.gif" alt="Player" class="character" style="position: absolute; left: 50%; top: 50%;">
+        <img id="player" src="hans-idle.gif" alt="Player" class="character" style="position: absolute; left: 50%; top: 50%;">
     </div>
     <div id="trigger1">Press [Space] To Interact</div>
     <div id="trigger2">Press [Space] To Interact</div>
@@ -139,7 +139,7 @@
                 isWalking = true;
                 switch (key) {
                     case 'KeyW':
-                        player.src = 'img/character/run-back.gif';
+                        player.src = 'run-back.gif';
                         moveInterval = setInterval(function() {
                             if(playerY > 35){
                                 playerScale -= scaleStep;
@@ -156,7 +156,7 @@
                         }, 50);
                         break;
                     case 'KeyA':
-                        player.src = 'img/character/run-left.gif';
+                        player.src = 'run-left.gif';
                         moveInterval = setInterval(function() {
                             if(playerX > 33){
                                 playerX -= (step + 0.6);
@@ -166,7 +166,7 @@
                         }, 50);
                         break;
                     case 'KeyS':
-                        player.src = 'img/character/run-front.gif';
+                        player.src = 'run-front.gif';
                         moveInterval = setInterval(function() {
                             if(playerY < 40){
                                 playerScale += scaleStep;
@@ -183,7 +183,7 @@
                         }, 50);
                         break;
                     case 'KeyD':
-                        player.src = 'img/character/run-right.gif';
+                        player.src = 'run-right.gif';
                         moveInterval = setInterval(function() {
                             message.textContent = "These are my experiences. I really am on the artsy and design side, and I still wish to be here. However, I want to finish University first, and land a stable job, to support me with my artist dreams!"
                             if(playerX < 62){
@@ -200,7 +200,7 @@
             const player = document.getElementById('player');
             if (isWalking) {
                 isWalking = false;
-                player.src = 'img/character/hans-idle.gif';
+                player.src = 'hans-idle.gif';
                 clearInterval(moveInterval);
             }
         }
