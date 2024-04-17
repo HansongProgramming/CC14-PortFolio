@@ -1,3 +1,8 @@
+iframe{
+    position: absolute;
+    top: 10%;
+    left: 10%;
+}
 .Container{
     height: 450px;
     width: 1080px;
@@ -5,7 +10,7 @@
     display: flex;
     flex-direction: row;
     border-radius: 100px;
-    margin-top: 10%;
+    margin-top: 15%;
 }
 
 .LeftControl{
@@ -149,26 +154,29 @@ text-decoration: none;
 color: white;
 }
 
-.ProjectsScreen{
-    background-color: #282a2b;
+
+h3{
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: rotate(20deg);
+    animation: Zooms 1s linear 0s infinite;
+}
+
+@keyframes Zooms {
+    0%{
+        scale: 0.8;
+    }50%{
+        scale: 1;
+    }100% {
+        scale: 0.8;
+    }
+}
+
+.InnerScreen2{
     width: 94%;
     height: 92%;
     margin: 20px;
-    overflow-y: scroll;
+    background-color: rgb(238, 39, 82);
     color: white;
 }
-
- ::-webkit-scrollbar-track{
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #343436;
-  }
-
-::-webkit-scrollbar{
-    width: 10px;
-    background-color: rgb(255, 255, 255);
-  }
-
-::-webkit-scrollbar-thumb{
-    background-color: rgb(255, 255, 255);
-    border: 2px solid #131314
-  }

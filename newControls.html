@@ -7,38 +7,119 @@
     <title>Hansong Crossing</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        img{
+        html{
+            background-color: rgb(22, 21, 22);
+        }
+        .pfp{
+            max-width: 10em;
+            position: absolute;
+            top: 1em;
+            left: 2em;
+        }
+        .character{
             scale: 2.0;
-            width: 15vh;
             height: 20vh;
+            width: 12vh;
             filter: sepia(30%) brightness(80%) saturate(200%);
             position: relative;
+            -webkit-box-reflect: below 0px linear-gradient(to top, rgba(0,0,0,0.5) 5%, rgba(0,0,0,0)10%);
+            z-index: 1;
         }
         .Game {
             width: auto;
             height: auto;
-            background: url('myRoom.png') no-repeat;
+            background: url('img/backgrounds/myRoom.png') no-repeat;
             background-size: contain;
             min-width: 70vw; 
             min-height: 75vh; 
+            overflow: hidden;
         }
 
         .info{
             position: absolute;
+            top: 60vh;
+            background-color: rgba(0,0,0,0.5);
+            width: 75vh;
+            height: 20vh;
+            border: 1px solid white;
+            border-radius: 25px;
+            color: white;
+            z-index: 3;
+        }
+        #trigger1, #trigger2, #trigger3{
+            width: 200px;
+            height: 60px;
+            position: absolute;
+            color: white;
+            text-shadow: 2px 2px 2px black;
+            font-size: 18px;
+            animation: Zooms 2s linear 0s infinite;
+        }
+        @keyframes Zooms {
+            0%{
+                scale: 0.8;
+            }50%{
+                scale: 1;
+            }100% {
+                scale: 0.8;
+            }
+        }
+        #trigger1{
+            left: 20%;
+            top: 48%;
+        }
+        #trigger2{
+            top: 25%;
+        }
+        #trigger3{
+            left: 70%;
+        }
+        .name{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 30px;
+            margin-left: 22vh;
+        }
+        #message{
+            max-width: 53vh;
+            max-height: 18vh;
+            overflow: hidden;
+            display: inline-block;
+            white-space: pre-wrap;
+            font-size: 20px;
+            margin-left: 22vh;
+            vertical-align: bottom;
+        }
+        .gamelogic{
+            position: absolute;
             top: 10%;
         }
-
+        h3{
+            margin-top: 10px;
+            text-align: right;
+        }
     </style>
 </head>
 <body class="flex items-center justify-center h-screen">
+    <audio id="myAudio" src="Audio/bgm.mp3" autoplay></audio>
+    <audio id="select"src="Audio/select.mp3"></audio>
     <div class="Game">
-        <img id="player" src="hans-idle.gif" alt="Player" class="w-32 h-41" style="position: absolute; left: 50%; top: 50%;">
+        <img id="player" src="img/Character/hans-idle.gif" alt="Player" class="character" style="position: absolute; left: 50%; top: 50%;">
     </div>
-    <div class="info">
-        <p id="gameSize">Game Size: </p>
-        <p id="playerCoordinates">Player Coordinates: </p>
+    <div id="trigger1">Press [Space] To Interact</div>
+    <div id="trigger2">Press [Space] To Interact</div>
+    <div id="trigger3">Press [Space] To Interact</div>
+    <div class="info" id="info">
+        <img src="img/profile/profile pic.png" class="pfp">
+        <h1 class="name">Hans:</h1>
+        <span id="message">Greetings!, my name is Flores Hans Harold L. an artist specializing in graphics design, animation, film directing, 3D animations, and Drawing. I also love creating projects that challenge me! check my laptop over there to see my projects and the cabinet to the right for my experiences!</span>
+        <h3>press [F] to see more.</h3>
     </div>
     <script>
+        let audioElement = document.getElementById('myAudio');
+        let select = document.getElementById('select');
+        audioElement.volume = 0.2;
+        audioElement.play();
+
         let isWalking = false;
         let idleTimer;
         let playerX = 45;
@@ -48,22 +129,16 @@
         let moveInterval;
         const scaleStep = 0.05;
         let scaleInterval;
-
-        function startWalking(key) {
-            
-        const gameSizeP = document.getElementById('gameSize');
-        gameSizeP.textContent = `Game Size: ${document.querySelector('.Game').clientWidth}px x ${document.querySelector('.Game').clientHeight}px`;
+        let trigger = document.getElementById("info");
+        let message = document.getElementById("message");
         
-
-        const playerCoordinatesP = document.getElementById('playerCoordinates');
-        playerCoordinatesP.textContent = `Player Coordinates: ${playerX}%, ${playerY}%`;
-
+        function startWalking(key) {
             const player = document.getElementById('player');
             if (!isWalking) {
                 isWalking = true;
                 switch (key) {
                     case 'KeyW':
-                        player.src = 'run-back.gif';
+                        player.src = 'img/character/run-back.gif';
                         moveInterval = setInterval(function() {
                             if(playerY > 35){
                                 playerScale -= scaleStep;
@@ -73,39 +148,43 @@
                                 if (playerScale <= 0.9) {
                                     playerScale = 0.9;
                                     clearInterval(scaleInterval);
+                                    message.textContent = "This is Augnina my lover. She is basically the inspiration to a lot of things in my life, if I have ever done good to you, thank her too! I drew this piece a few months ago. Do you like my Art?";
                                 }
                             }
 
                         }, 50);
                         break;
                     case 'KeyA':
-                        player.src = 'run-left.gif';
+                        player.src = 'img/character/run-left.gif';
                         moveInterval = setInterval(function() {
                             if(playerX > 33){
                                 playerX -= (step + 0.6);
                                 player.style.left = playerX + '%';
+                                message.textContent = "I have done projects from last year (2023) specifically in AI creation. I have tried to duplicate Chat GPT using their API, and also create an on-screen tool for artists that works well for animation. Right now, I am Learning the Canvas API to make UC Canvas Cooler!"
                             }
                         }, 50);
                         break;
                     case 'KeyS':
-                        player.src = 'run-front.gif';
+                        player.src = 'img/character/run-front.gif';
                         moveInterval = setInterval(function() {
                             if(playerY < 40){
                                 playerScale += scaleStep;
                                 playerY += step;
                                 player.style.top = playerY + '%';
                                 player.style.transform = 'scale(' + playerScale + ')';
-                                if (playerScale >= 1.3){
-                                    playerScale = 1.3;
+                                if (playerScale >= 0.9){
+                                    playerScale = 0.9;
                                     clearInterval(scaleInterval);
+                                    message.textContent = "Greetings!, my name is Flores Hans Harold L. an artist specializing in graphics design, animation, film directing, 3D animations, and Drawing. I also love creating projects that challenge me! check my laptop over there to see my projects and the cabinet to the right for my experiences!"
                                 }
                             }
 
                         }, 50);
                         break;
                     case 'KeyD':
-                        player.src = 'run-right.gif';
+                        player.src = 'img/character/run-right.gif';
                         moveInterval = setInterval(function() {
+                            message.textContent = "These are my experiences. I really am on the artsy and design side, and I still wish to be here. However, I want to finish University first, and land a stable job, to support me with my artist dreams!"
                             if(playerX < 62){
                                 playerX += (step + 0.6);
                                 player.style.left = playerX + '%';
@@ -120,7 +199,7 @@
             const player = document.getElementById('player');
             if (isWalking) {
                 isWalking = false;
-                player.src = 'hans-idle.gif';
+                player.src = 'img/character/hans-idle.gif';
                 clearInterval(moveInterval);
             }
         }
@@ -129,6 +208,11 @@
             if (event.code === 'KeyW' || event.code === 'KeyA' || event.code === 'KeyS' || event.code === 'KeyD') {
                 startWalking(event.code);
                 clearTimeout(idleTimer);
+                trigger.style.display = "none";
+            }
+            if (event.code === 'Space') {
+                select.play();
+                trigger.style.display = "inline-block";
             }
         });
 
